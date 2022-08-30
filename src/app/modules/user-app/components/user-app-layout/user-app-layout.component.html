@@ -1,0 +1,52 @@
+<div class="h-100 w-100">
+  <mat-drawer-container class="h-100 w-100" hasBackdrop="false">
+    <mat-drawer #drawer mode="push" class="d-xl-none">
+      <mat-toolbar class="mb-3">
+        <button mat-icon-button (click)="drawer.close()">
+          <mat-icon *ngIf="drawer.opened">close</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div
+        *ngFor="let item of menuItems"
+        class="menu-item d-flex align-items-center justify-content-start px-4"
+        [routerLink]="['/app/'+item]"
+        routerLinkActive="menu-item__selected"
+        (click)="drawer.close()">
+        <mat-icon>{{ item }}</mat-icon>
+        <span class="px-3">{{ item }}</span>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content class="h-100 w-100 d-flex flex-column">
+      <!-- HEADER -->
+      <mat-toolbar>
+        <button
+          mat-icon-button 
+          class="d-block d-xl-none"
+          *ngIf="!drawer.opened"
+          (click)="drawer.toggle()" 
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Proxify.io</span>
+      </mat-toolbar>
+      <!-- BODY -->
+      <div class="mat-body-container flex-grow-1 row m-0 p-0" (click)="drawer.close()">
+        <div class="col-2 d-none d-xl-block p-0 mt-3">
+          <div
+            *ngFor="let item of menuItems"
+            class="menu-item d-flex align-items-center justify-content-start px-4"
+            [routerLink]="['/app/'+item]"
+            routerLinkActive="menu-item__selected"
+          >
+            <span class="px-3">{{ item }}</span>
+          </div>
+        </div>
+        <div class="col-12 col-xl-10 p-relative p-3">
+          <div class="h-100 w-100 body-card">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
