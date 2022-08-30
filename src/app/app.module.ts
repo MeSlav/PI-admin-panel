@@ -12,7 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core'
 
 // app components
 import { AppComponent } from './app.component';
@@ -52,7 +53,8 @@ import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-
     MatSidenavModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

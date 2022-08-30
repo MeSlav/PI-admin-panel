@@ -8,11 +8,12 @@
       </mat-toolbar>
       <div
         *ngFor="let item of menuItems"
+        matRipple
+        matRippleColor="rgba(255, 255, 255, 0.3)"
         class="menu-item d-flex align-items-center justify-content-start px-4"
         [routerLink]="['/app/'+item]"
         routerLinkActive="menu-item__selected"
         (click)="drawer.close()">
-        <mat-icon>{{ item }}</mat-icon>
         <span class="px-3">{{ item }}</span>
       </div>
     </mat-drawer>
@@ -34,6 +35,8 @@
         <div class="col-2 d-none d-xl-block p-0 mt-3">
           <div
             *ngFor="let item of menuItems"
+            matRipple
+            matRippleColor="rgba(255, 255, 255, 0.3)"
             class="menu-item d-flex align-items-center justify-content-start px-4"
             [routerLink]="['/app/'+item]"
             routerLinkActive="menu-item__selected"

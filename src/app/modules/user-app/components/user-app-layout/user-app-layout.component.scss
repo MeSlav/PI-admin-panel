@@ -10,13 +10,13 @@
   min-width: 300px;
   box-shadow: none !important;
   background-color: #d3e5ff !important;
-  user-select: none;
 }
 
 .menu-item {
   padding: 15px 5px;
   cursor: pointer;
   text-transform: capitalize;
+  user-select: none;
 }
 
 .menu-item:hover, 
@@ -25,6 +25,6 @@
   border-radius: 0 30px 30px 0;
   color: white;
   &:hover {
-    opacity: 0.7;
+    opacity: 0.9;
   }
 }
