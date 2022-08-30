@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 // angular material modules
@@ -28,6 +28,7 @@ import { ProjectsComponent } from './modules/user-app/components/projects/projec
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { RegisterComponent } from './modules/auth/components/register/register.component';
 import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-layout.component';
+import { TokenInterceptor } from './modules/auth/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,13 @@ import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-
     MatIconModule,
     MatRippleModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

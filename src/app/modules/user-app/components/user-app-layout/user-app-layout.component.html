@@ -29,6 +29,15 @@
           <mat-icon>menu</mat-icon>
         </button>
         <span>Proxify.io</span>
+        <span class="spacer"></span>
+        <button
+          mat-button 
+          color="primary"
+          (click)="onLogout()"
+        >
+          <span class="px-2">Logout</span>
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
       </mat-toolbar>
       <!-- BODY -->
       <div class="mat-body-container flex-grow-1 row m-0 p-0" (click)="drawer.close()">
