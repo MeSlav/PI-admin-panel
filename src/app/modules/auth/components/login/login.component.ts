@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,8 +9,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: string = 'test';
-  password: string = 'test';
+  email: string = 'dragan.zovko@neuros.hr';
+  password: string = 'pass';
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     this.authService.login({
       email: this.email,
       password: this.password,
-    });
-    // this.router.navigate(['/app']);
+    })
+    .pipe(take(1))
+    .subscribe(() => this.router.navigate(['/app']));
   }
 }
