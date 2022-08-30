@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -44,6 +46,8 @@ import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
     // angular material
     MatCardModule,
     MatTabsModule,
