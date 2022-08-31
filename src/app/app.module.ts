@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // angular material modules
 import { MatCardModule } from '@angular/material/card';
@@ -12,10 +13,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatSidenavModule } from '@angular/material/sidenav'
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatRippleModule } from '@angular/material/core'
+import { MatRippleModule } from '@angular/material/core';
 
 // app components
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     // angular material
     MatCardModule,
     MatTabsModule,
@@ -58,9 +60,9 @@ import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

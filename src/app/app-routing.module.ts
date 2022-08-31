@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-layout.component';
+import { LoginComponent } from './modules/auth/components/login/login.component';
 import { EmployeesComponent } from './modules/user-app/components/employees/employees.component';
 import { EquipmentComponent } from './modules/user-app/components/equipment/equipment.component';
 import { HomeComponent } from './modules/user-app/components/home/home.component';
@@ -17,6 +18,12 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthLayoutComponent,
+    children : [
+      {
+        path: '',
+        component: LoginComponent,
+      }
+    ]
   },
   {
     path: 'app',
