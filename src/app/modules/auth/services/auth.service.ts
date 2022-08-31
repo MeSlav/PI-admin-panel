@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, take } from 'rxjs';
 import { ENVIRONMETS } from 'src/app/constants/environmentsEnum';
+import { Employee, Token } from 'src/app/types/types';
 
 type UserDetails = {
   email: string,
@@ -9,20 +10,8 @@ type UserDetails = {
 };
 
 type AppLocalStorage = {
-  account: {
-    address: string
-    availability: any
-    busy_days: any[]
-    email: string
-    id: number
-    name: string
-    phone_number: string
-    price_per_hour: any
-  },
-  token: {
-    access: string,
-    refresh: string,
-  }
+  account: Employee,
+  token: Token,
 }
 
 @Injectable({

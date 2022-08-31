@@ -1,5 +1,38 @@
 <div class="employees-container row m-0 p-0">
   <div class="employees-container__table col-12">
-    AAAAAAAAA
+    <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- E-mail Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <!-- E-mail Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+    
+      <!-- Phone Number Column -->
+      <ng-container matColumnDef="phone_number">
+        <th mat-header-cell *matHeaderCellDef> Phone number </th>
+        <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
+      </ng-container>
+    
+      <!-- Availability Column -->
+      <ng-container matColumnDef="availability">
+        <th mat-header-cell *matHeaderCellDef> Availability </th>
+        <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
   </div>
 </div>
