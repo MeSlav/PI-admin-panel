@@ -10,10 +10,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  email: string = 'draganzovko@gmail.com';
-  password: string = 'passdsa';
+  email: string = 'dragan.zovko@neuros.hr';
+  password: string = 'pass';
   hide: boolean = true;
-
 
   loginForm!: FormGroup;
 
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup(
       {
       email : new FormControl('',[Validators.required, Validators.email]),
-      password : new FormControl('', [Validators.required, Validators.minLength(6)])
+      password : new FormControl('', [Validators.required, Validators.minLength(4)])
       }
     )
   }

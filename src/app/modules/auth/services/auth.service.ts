@@ -36,10 +36,10 @@ export class AuthService {
 
   getToken(){
     if (!this.locallyStoredData) {
-      this.locallyStoredData = JSON.parse(localStorage.getItem('app-admin-panel:auth') as string | '{ token: {} }');
+      this.locallyStoredData = JSON.parse(localStorage.getItem('app-admin-panel:auth') as string);
     }
 
-    return this.locallyStoredData.token;
+    return this.locallyStoredData?.token || { token: { access: '' } };
   }
 
   setToken(data: AppLocalStorage) {
