@@ -4,6 +4,7 @@
 
 ::ng-deep .mat-body-container {
   background-color: #d3e5ff;
+  height: calc(100vh - 64px) !important;
 }
 
 ::ng-deep .mat-drawer {
