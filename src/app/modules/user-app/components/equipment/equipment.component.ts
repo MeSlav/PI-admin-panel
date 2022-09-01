@@ -17,10 +17,10 @@ export class EquipmentComponent implements OnInit {
   equipment: MatTableDataSource<Employee> = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'name', 'market_value', 'price_per_hour', 'category'];
 
-  constructor(private employeesService: EquipmentService) { }
+  constructor(private equipmentService: EquipmentService) { }
 
   ngOnInit(): void {
-    this.employeesService.getEquipment()
+    this.equipmentService.getEquipment()
       .subscribe((res) => {
         this.equipment.data = (res as any).results as Employee[];
       });

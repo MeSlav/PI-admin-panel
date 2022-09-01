@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from 'src/app/types/types';
-import { EquipmentService } from '../../services/equipment.service';
+import { ServicesService } from '../../services/services.service';
 
 @Component({
   selector: 'app-services',
@@ -14,29 +14,29 @@ export class ServicesComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  equipment: MatTableDataSource<Employee> = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'name', 'market_value', 'price_per_hour', 'category'];
+  services: MatTableDataSource<Employee> = new MatTableDataSource();
+  displayedColumns: string[] = ['id', 'description', 'price', 'category'];
 
-  constructor(private employeesService: EquipmentService) { }
+  constructor(private employeesService: ServicesService) { }
 
   ngOnInit(): void {
-    this.employeesService.getEquipment()
-      .subscribe((res) => {
-        this.equipment.data = (res as any).results as Employee[];
+    this.employeesService.getServices()
+      .subscribe(res => {
+        this.services.data = (res as any).results as Employee[];
       });
   }
 
   ngAfterViewInit(): void {
-    this.equipment.sort = this.sort;
-    this.equipment.paginator = this.paginator;
+    this.services.sort = this.sort;
+    this.services.paginator = this.paginator;
   }
 
   applyFilter(e: Event) {
     const filterValue = (e.target as HTMLInputElement).value;
-    this.equipment.filter = filterValue.trim().toLowerCase();
+    this.services.filter = filterValue.trim().toLowerCase();
 
-    if (this.equipment.paginator) {
-      this.equipment.paginator.firstPage();
+    if (this.services.paginator) {
+      this.services.paginator.firstPage();
     }
   }
 
