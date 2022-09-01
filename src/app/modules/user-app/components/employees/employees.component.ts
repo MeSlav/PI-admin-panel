@@ -22,9 +22,6 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.employeesService.getEmployees()
       .subscribe((res) => {
-        for(let i = 0; i < 50; i++) {
-          (res as Employee[]).push((res as Employee[])[0]);
-        }
         this.employees.data = res as Employee[];
       });
   }
