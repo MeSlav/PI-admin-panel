@@ -12,7 +12,7 @@ import { EmployeesService } from '../../services/employees.service';
 })
 export class EmployeesComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   employees: MatTableDataSource<Employee> = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'name', 'email', 'phone_number', 'availability'];

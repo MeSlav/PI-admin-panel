@@ -5,7 +5,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Start typing to search..." #input>
     </mat-form-field>
 
-    <div class="employees-container__table flex-grow-1">
+    <div class="flex-grow-1 overflow-auto">
       <table mat-table [dataSource]="employees" class="w-100"
         matSort matSortActive="id" matSortDisableClear matSortDirection="asc">
         <!-- ID Column -->
