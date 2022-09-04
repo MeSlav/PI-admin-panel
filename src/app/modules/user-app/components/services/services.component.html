@@ -1,5 +1,6 @@
-<div class="services-container row m-0 p-0 h-100">
-  <mat-card class="col-12 d-flex flex-column h-100 mat-elevation-z8 px-0">
+<div class="services-containerm-0 p-0 h-100 d-flex flex-column">
+  <div class="app-view__title py-3"> Services </div>
+  <mat-card class="d-flex flex-column h-100 mat-elevation-z8 px-0 flex-grow-1">
     <mat-form-field appearance="standard" class="w-100 px-4">
       <mat-label>Search</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Start typing to search..." #input>
