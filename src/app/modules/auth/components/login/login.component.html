@@ -19,7 +19,7 @@
       <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">
         Required Password
       </mat-error>
-      <button mat-flat-button color="primary" type="button" class="w-100 mt-4" (click)="onLogin()">
+      <button mat-flat-button color="primary" type="button" class="w-100 mt-4" (click)="onLogin()" [disabled]="loginForm.invalid">
         Login
       </button>
     </form>
