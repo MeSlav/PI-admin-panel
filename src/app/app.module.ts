@@ -19,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // app components
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 import { RegisterComponent } from './modules/auth/components/register/register.component';
 import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-layout.component';
 import { TokenInterceptor } from './modules/auth/interceptors/token.interceptor';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,12 +70,18 @@ import { TokenInterceptor } from './modules/auth/interceptors/token.interceptor'
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatProgressBarModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]
