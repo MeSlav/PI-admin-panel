@@ -20,11 +20,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: #555; 
 }
 
-/* =============== GENERAL STYLES =============== */
+/* =============== STYLE OVERRIDES =============== */
+.mat-tab-header {
+  user-select: none;
+}
+
 .mat-card {
   border-radius: 20px !important;
 }
 
+/* =============== GENERAL STYLES =============== */
 .spacer {
   flex: 1 1 auto;
 }
@@ -38,4 +43,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-bottom: 2px solid blue;
   width: fit-content;
   margin-bottom: 15px;
+  user-select: none;
 }

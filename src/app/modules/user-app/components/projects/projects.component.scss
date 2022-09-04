@@ -1,7 +1,18 @@
 .projects-container {
+  padding-top: 15px;
+
   ::ng-deep .mat-tab-header {
-    padding: 0 30px;
+    padding: 0;
     border-bottom: 0px;
+
+    .mat-tab-disabled {
+      padding-left: 0px;
+      color: black;
+      font-size: 1.75rem;
+      width: fit-content;
+      position: relative;
+      top: -10px;
+    }
   }
 
   ::ng-deep .mat-tab-body-wrapper {
