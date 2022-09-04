@@ -1,0 +1,10 @@
+.projects-container {
+  ::ng-deep .mat-tab-header {
+    padding: 0 30px;
+    border-bottom: 0px;
+  }
+
+  ::ng-deep .mat-tab-body-wrapper {
+    flex-grow: 1;
+  }
+}

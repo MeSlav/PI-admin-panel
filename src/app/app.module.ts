@@ -35,6 +35,8 @@ import { RegisterComponent } from './modules/auth/components/register/register.c
 import { AuthLayoutComponent } from './modules/auth/components/auth-layout/auth-layout.component';
 import { TokenInterceptor } from './modules/auth/interceptors/token.interceptor';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { JobsComponent } from './modules/user-app/components/jobs/jobs.component';
+import { ApplicationsComponent } from './modules/user-app/components/applications/applications.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     LoginComponent,
     RegisterComponent,
     AuthLayoutComponent,
+    JobsComponent,
+    ApplicationsComponent,
   ],
   imports: [
     BrowserModule,
