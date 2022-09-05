@@ -45,3 +45,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-bottom: 15px;
   user-select: none;
 }
+
+.table__row{
+  &--hovered,
+  &--highlighted {
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+}

@@ -1,10 +1,15 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { switchMap, take } from 'rxjs';
 import { Employee } from 'src/app/types/types';
 import { EmployeesService } from '../../services/employees.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -15,14 +20,30 @@ export class EmployeesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   employees: MatTableDataSource<Employee> = new MatTableDataSource();
+  selectedEmployee?: Employee;
+  selection = new SelectionModel<any>(false, []);
   displayedColumns: string[] = ['id', 'name', 'email', 'phone_number', 'availability'];
 
-  constructor(private employeesService: EmployeesService) { }
+  constructor(
+    private employeesService: EmployeesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.employeesService.getEmployees()
-      .subscribe((res) => {
-        this.employees.data = res as Employee[];
+      .pipe(
+        untilDestroyed(this),
+        switchMap(res => this.employees.data = res as Employee[]),
+      )
+      .pipe(
+        untilDestroyed(this),
+        take(1),
+        switchMap(() => this.route.queryParams.pipe(untilDestroyed(this))),
+      )
+      .subscribe((queryParams: any) => {
+        this.selectedEmployee = this.employees.data.find(emp => emp.id === +queryParams.employee);
+        this.selection.toggle(this.selectedEmployee);
       });
   }
 
@@ -38,6 +59,13 @@ export class EmployeesComponent implements OnInit {
     if (this.employees.paginator) {
       this.employees.paginator.firstPage();
     }
+  }
+
+  onRowSelect(row: any) {
+    this.router.navigate([], {
+      queryParams: { employee: row.id },
+      relativeTo: this.route,
+    })
   }
 
 }

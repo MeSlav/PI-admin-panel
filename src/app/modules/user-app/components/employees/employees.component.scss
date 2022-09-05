@@ -1,3 +1,7 @@
 .employees-container__table {
   overflow: auto;
 }
+
+.employees-container {
+  transition: width 0.1s ease-in;
+}
