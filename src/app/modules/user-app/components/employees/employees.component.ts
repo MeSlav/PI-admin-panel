@@ -65,7 +65,7 @@ export class EmployeesComponent implements OnInit {
     this.router.navigate([], {
       queryParams: { employee: row.id },
       relativeTo: this.route,
-    })
+    });
   }
 
 }

@@ -1,10 +1,14 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Employee } from 'src/app/types/types';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { switchMap, take } from 'rxjs';
 import { EquipmentService } from '../../services/equipment.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-equipment',
   templateUrl: './equipment.component.html',
@@ -14,15 +18,31 @@ export class EquipmentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  equipment: MatTableDataSource<Employee> = new MatTableDataSource();
+  selection = new SelectionModel<any>(false, []);
+
+  equipment: MatTableDataSource<any> = new MatTableDataSource();
+  selectedEquipment?: any;
   displayedColumns: string[] = ['id', 'name', 'market_value', 'price_per_hour', 'category'];
 
-  constructor(private equipmentService: EquipmentService) { }
+  constructor(
+    private equipmentService: EquipmentService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
     this.equipmentService.getEquipment()
-      .subscribe((res) => {
-        this.equipment.data = (res as any).results as Employee[];
+      .pipe(
+        take(1),
+        untilDestroyed(this),
+        switchMap(res => this.equipment.data = (res as any).results as any[])
+      )
+      .pipe(
+        switchMap(() => this.route.queryParams.pipe(untilDestroyed(this))),
+      )
+      .subscribe((queryParams: any) => {
+        this.selectedEquipment = this.equipment.data.find(emp => emp.id === +queryParams.equipment);
+        this.selection.toggle(this.selectedEquipment);
       });
   }
 
@@ -38,6 +58,13 @@ export class EquipmentComponent implements OnInit {
     if (this.equipment.paginator) {
       this.equipment.paginator.firstPage();
     }
+  }
+
+  onRowSelect(row: any) {
+    this.router.navigate([], {
+      queryParams: { equipment: row.id },
+      relativeTo: this.route,
+    });
   }
 
 }
