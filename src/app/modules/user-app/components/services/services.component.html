@@ -1,48 +1,68 @@
-<div class="services-containerm-0 p-0 h-100 d-flex flex-column">
-  <div class="app-view__title py-3 px-2"> Services </div>
-  <mat-card class="d-flex flex-column h-100 mat-elevation-z8 px-0 flex-grow-1">
-    <div class="px-4 row m-0 d-flex align-items-center justify-content-between">
-      <mat-form-field appearance="standard" class="col-7 col-lg-3">
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Start typing to search..." #input>
-      </mat-form-field>
-      <button mat-flat-button color="primary" class="col-3 col-lg-1">
-        <mat-icon>add</mat-icon>
-        Add
-      </button>
-    </div>
-
-    <div class="overflow-auto flex-grow-1">
-      <table mat-table [dataSource]="services" class="w-100"
-        matSort matSortActive="id" matSortDisableClear matSortDirection="asc">
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
+<div class="row h-100 m-0 p-0">
+  <div
+    class="services-containerm-0 transition-container m-0 p-0 h-100 d-flex flex-column d-md-flex"
+    [class.col-12]="!selectedService"
+    [class.col-7]="selectedService"
+    [class.d-none]="selectedService"
+  >
+    <div class="app-view__title py-3 px-2"> Services </div>
+    <mat-card class="d-flex flex-column h-100 mat-elevation-z8 px-0 flex-grow-1">
+      <div class="px-4 row m-0 d-flex align-items-center justify-content-between">
+        <mat-form-field appearance="standard" class="col-7 col-lg-3">
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Start typing to search..." #input>
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="col-3 col-lg-2">
+          <mat-icon>add</mat-icon>
+          Add
+        </button>
+      </div>
   
-        <!-- E-mail Column -->
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-      
-        <!-- E-mail Column -->
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-        </ng-container>
-      
-        <!-- Availability Column -->
-        <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef> Category </th>
-          <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
-    <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
-  </mat-card>
+      <div class="overflow-auto flex-grow-1">
+        <table mat-table [dataSource]="services" class="w-100"
+          matSort matSortActive="id" matSortDisableClear matSortDirection="asc">
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+    
+          <!-- E-mail Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+        
+          <!-- E-mail Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          </ng-container>
+        
+          <!-- Availability Column -->
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+            mat-row
+            (click)="onRowSelect(row)"
+            (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
+            [ngClass]="{ 'table__row--hovered': row.hovered, 'table__row--highlighted': selection.isSelected(row) }"
+            *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
+    </mat-card>
+  </div>
+  <div class="selected-service-container col-12 col-md-5 d-flex flex-column" *ngIf="selectedService">
+    <div class="app-view__title py-3 px-2"> Service details </div>
+    <mat-card class="flex-grow-1 mat-elevation-z8">
+      <span class="d-block d-md-none">Back arrow</span>
+      <span>TESDT</span>
+    </mat-card>
+  </div>
 </div>
