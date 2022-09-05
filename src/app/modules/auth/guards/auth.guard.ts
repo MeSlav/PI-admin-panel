@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
     const isLoggedIn = this.authServide.getToken().access?.length;
-    console.log(isLoggedIn)
 
     if(!isLoggedIn) {
       this.authServide.removeToken();
