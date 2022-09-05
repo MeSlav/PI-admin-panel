@@ -28,7 +28,7 @@ export class AuthService {
       this.locallyStoredData = JSON.parse(localStorage.getItem('app-admin-panel:auth') as string);
     }
 
-    return this.locallyStoredData?.token || { token: { access: '' } };
+    return this.locallyStoredData?.token || { access: '' };
   }
 
   setToken(data: AppLocalStorage) {
@@ -38,6 +38,8 @@ export class AuthService {
 
   removeToken() {
     localStorage.removeItem('app-admin-panel:auth');
+    if(!this.locallyStoredData) return;
+    this.locallyStoredData.token = { access: '', refresh: '' };
   }
 
   login(userDetails: UserDetails) {
@@ -59,8 +61,11 @@ export class AuthService {
     this.http.post(`${this.apiUrl}/auth/logout/`, {})
       .pipe(take(1))
       .subscribe(() => {
-        this.removeToken();
         subj.next(true);
+        this.removeToken();
+      }, () => {
+        subj.next(true);
+        this.removeToken();
       });
 
     return subj.asObservable();
