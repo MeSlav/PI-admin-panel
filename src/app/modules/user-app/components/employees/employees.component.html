@@ -1,8 +1,9 @@
 <div class="row m-0 p-0 h-100">
   <div
-    class="employees-container m-0 p-0 h-100 d-flex flex-column"
+    class="employees-container m-0 p-0 h-100 d-flex flex-column d-md-flex"
     [class.col-12]="!selectedEmployee"
     [class.col-7]="selectedEmployee"
+    [class.d-none]="selectedEmployee"
   >
     <div class="app-view__title py-3 px-2"> Employees </div>
     <mat-card class="d-flex flex-column h-100 mat-elevation-z8 px-0 flex-grow-1">
@@ -63,10 +64,11 @@
       <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
     </mat-card>
   </div>
-  <div class="employee-details-container col-5 d-flex flex-column" *ngIf="selectedEmployee">
+  <div class="employee-details-container col-12 col-md-5 d-flex flex-column" *ngIf="selectedEmployee">
     <div class="app-view__title py-3 px-2"> Employee Details </div>
     <mat-card class="flex-grow-1">
-      TEST
+      <span class="d-block d-md-none">Back arrow</span>
+      <span>TESDT</span>
     </mat-card>
   </div>
 </div>
