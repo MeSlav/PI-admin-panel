@@ -41,9 +41,15 @@ export class EmployeesComponent implements OnInit {
         take(1),
         switchMap(() => this.route.queryParams.pipe(untilDestroyed(this))),
       )
-      .subscribe((queryParams: any) => {
-        this.selectedEmployee = this.employees.data.find(emp => emp.id === +queryParams.employee);
-        this.selection.toggle(this.selectedEmployee);
+      .pipe(
+        switchMap((queryParams: any) => {
+          if(!queryParams.employee) return Promise.resolve();
+          return this.employeesService.getEmployeeById(queryParams.employee)
+        })
+      )
+      .subscribe((selectedEmployee: any) => {
+        this.selectedEmployee = selectedEmployee;
+        this.selection.toggle(this.employees.data.find(emp => emp.id === selectedEmployee?.id));
       });
   }
 
