@@ -1,13 +1,13 @@
 <div class="row m-0 p-0 h-100">
   <div class="col-5 m-0 h-100 d-flex flex-column">
     <div class="app-view__title py-3 px-2"> Personal info </div>
-    <mat-card class="d-flex flex-column h-100 mat-elevation-z8 flex-grow-1">
-      <app-employee-details [employee]="personalInfo" [ispersonalDetails]="true"></app-employee-details>
+    <mat-card class="d-flex flex-column px-0 mat-elevation-z8 flex-grow-1" style="height: 5px !important;">
+      <app-employee-details [employee]="personalInfo" [ispersonalDetails]="true" class="h-100"></app-employee-details>
     </mat-card>
   </div>
   <div class="col-7 m-0 h-100 d-flex flex-column">
     <div class="app-view__title py-3 px-2"> Companies </div>
-    <mat-card class="d-flex flex-column h-100 mat-elevation-z8 flex-grow-1">
+    <mat-card class="d-flex flex-column mat-elevation-z8 flex-grow-1" style="height: 5px;">
       <div class="px-4 row m-0 d-flex align-items-center justify-content-between">
         <mat-form-field appearance="standard" class="col-7 col-lg-5">
           <mat-label>Search</mat-label>

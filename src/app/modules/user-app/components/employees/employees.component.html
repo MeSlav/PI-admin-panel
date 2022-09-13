@@ -64,10 +64,10 @@
       <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
     </mat-card>
   </div>
-  <div class="employee-details-container col-12 col-md-5 d-flex flex-column" *ngIf="selectedEmployee">
+  <div class="employee-details-container col-12 col-md-5 d-flex flex-column h-100" *ngIf="selectedEmployee">
     <div class="app-view__title py-3 px-2"> Employee Details </div>
-    <mat-card class="flex-grow-1 mat-elevation-z8 px-0">
-      <app-employee-details [employee]="selectedEmployee"></app-employee-details>
+    <mat-card class="d-flex flex-column px-0 mat-elevation-z8 flex-grow-1" style="height: 5px !important;">
+      <app-employee-details [employee]="selectedEmployee" class="h-100"></app-employee-details>
     </mat-card>
   </div>
 </div>
