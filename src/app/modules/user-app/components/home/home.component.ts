@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from 'src/app/types/types';
 import { CompaniesService } from '../../services/companies.service';
 import { EmployeesService } from '../../services/employees.service';
@@ -12,7 +13,7 @@ import { EmployeesService } from '../../services/employees.service';
 })
 export class HomeComponent implements OnInit {
   personalInfo!: Employee;
-  companies: any[] = [];
+  companies: MatTableDataSource<any> = new MatTableDataSource<any>();
 
   displayedColumns: string[] = ['id', 'name', 'web'];
 
@@ -34,12 +35,17 @@ export class HomeComponent implements OnInit {
     this.companiesService
       .getCompanies()
       .subscribe((res: any) => {
-        this.companies = res;
+        this.companies.data = res;
       })
   }
 
   applyFilter(e: Event) {
+    const filterValue = (e.target as HTMLInputElement).value;
+    this.companies.filter = filterValue.trim().toLowerCase();
 
+    if (this.companies.paginator) {
+      this.companies.paginator.firstPage();
+    }
   }
 
 }
