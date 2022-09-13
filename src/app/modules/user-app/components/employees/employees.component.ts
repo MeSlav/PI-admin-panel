@@ -80,9 +80,6 @@ export class EmployeesComponent implements OnInit {
   onAddEmployee() {
     this.dialog.open(AddEmployeeModalComponent, {
       width: '400px',
-      data: {
-        isModal: true,
-      }
     });
   }
 
