@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Employee } from 'src/app/types/types';
 
 @Component({
@@ -19,6 +18,7 @@ export class EmployeeDetailsComponent implements OnInit, OnChanges {
     busy_days: [],
     price_per_hour: ''
   };
+  @Input() ispersonalDetails: boolean = false;
   employeeFrom!: FormGroup;
 
   constructor() { }
