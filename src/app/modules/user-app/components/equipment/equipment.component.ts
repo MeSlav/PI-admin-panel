@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { EquipmentService } from '../../services/equipment.service';
   templateUrl: './equipment.component.html',
   styleUrls: ['./equipment.component.scss']
 })
-export class EquipmentComponent implements OnInit {
+export class EquipmentComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   selection = new SelectionModel<any>(false, []);
@@ -58,8 +58,12 @@ export class EquipmentComponent implements OnInit {
       .subscribe((equipment: any) => {
         this.selection.toggle(this.equipment.data.find(emp => emp.id === +equipment?.results?.id));
         this.selectedEquipment = equipment?.results;
-        console.log("EQUIPMENT", this.selectedEquipment);
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!this.equipmentFrom) return;
+    this.equipmentFrom.markAsPristine();
   }
 
   ngAfterViewInit(): void {

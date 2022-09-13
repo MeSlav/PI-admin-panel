@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,24 +16,32 @@ import { ServicesService } from '../../services/services.service';
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss']
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   selection = new SelectionModel<any>(false, []);
-
   services: MatTableDataSource<Employee> = new MatTableDataSource();
   selectedService: any;
   displayedColumns: string[] = ['id', 'description', 'price', 'category'];
 
+  serviceFrom!: FormGroup;
+
   constructor(
-    private employeesService: ServicesService,
+    private servicesService: ServicesService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.employeesService.getServices()
+    this.serviceFrom = new FormGroup({
+      name: new FormControl('',[Validators.required]),
+      pricePerHour: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
+      marketValue: new FormControl('',),
+      category : new FormControl('',),
+    })
+
+    this.servicesService.getServices()
       .pipe(
         take(1),
         untilDestroyed(this),
@@ -41,10 +50,21 @@ export class ServicesComponent implements OnInit {
       .pipe(
         switchMap(() => this.route.queryParams.pipe(untilDestroyed(this))),
       )
-      .subscribe((queryParams: any) => {
-        this.selectedService = this.services.data.find(servicve => servicve.id === +queryParams.service);
-        this.selection.toggle(this.selectedService);
+      .pipe(
+        switchMap((queryParams: any) => {
+          if(!queryParams.service) return Promise.resolve();
+          return this.servicesService.getServiceById(queryParams.service)
+        })
+      )
+      .subscribe((service: any) => {
+        this.selection.toggle(this.services.data.find(servicve => servicve.id === +service?.id));
+        this.selectedService = service;
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(!this.serviceFrom) return;
+    this.serviceFrom.markAsPristine();
   }
 
   ngAfterViewInit(): void {
@@ -66,6 +86,10 @@ export class ServicesComponent implements OnInit {
       queryParams: { service: row.id },
       relativeTo: this.route,
     });
+  }
+
+  onNavigateBack() {
+    history.back();
   }
 
 }

@@ -60,9 +60,44 @@
   </div>
   <div class="selected-service-container col-12 col-md-5 d-flex flex-column" *ngIf="selectedService">
     <div class="app-view__title py-3 px-2"> Service details </div>
-    <mat-card class="flex-grow-1 mat-elevation-z8">
-      <span class="d-block d-md-none">Back arrow</span>
-      <span>TESDT</span>
+    <mat-card class="flex-grow-1 mat-elevation-z8 h-100 d-flex flex-column" style="height: 5px !important;">
+      <div class="h1 text-center d-flex justify-content-center align-items-center">
+        <button mat-mini-fab color="primary" (click)="onNavigateBack()" class="d-block d-md-none position-absolute left-0 mx-5">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span>Service details</span>
+      </div>
+      
+      <div class="d-flex flex-column align-items-center justify-content-center w-100 flex-grow-1 overflow-auto">
+        <form [formGroup]="serviceFrom" class="w-75">
+          <div class="px-2">Price</div>
+          <mat-form-field class="w-100 mt-2" appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput formControlName="pricePerHour" [(ngModel)]="selectedService.price">
+          </mat-form-field>
+
+          <div class="px-2">Category</div>
+          <mat-form-field class="w-100 mt-2" appearance="fill">
+            <mat-label>Category</mat-label>
+            <input matInput formControlName="price" [(ngModel)]="selectedService.category.name">
+          </mat-form-field>
+
+          <div class="px-2">Description</div>
+          <mat-form-field class="w-100 mt-2" appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea 
+              matInput 
+              formControlName="name" 
+              [(ngModel)]="selectedService.description"
+              style="min-height: 100px; max-height: 100px;"
+            ></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="d-flex px-4 pt-3 justify-content-end">
+        <button mat-flat-button color="primary" mat-dialog-close [disabled]="!serviceFrom.dirty || !serviceFrom.valid">Save</button>
+        <button mat-button color="error" mat-dialog-close>Delete</button>
+      </div>
     </mat-card>
   </div>
 </div>
