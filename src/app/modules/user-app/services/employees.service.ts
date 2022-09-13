@@ -28,4 +28,9 @@ export class EmployeesService {
     return this.http.delete(`${ENVIRONMETS.production}/accounts/accounts/${employeeId}`)
       .pipe(take(1));
   }
+
+  getPersonalInfo() {
+    return this.http.get(`${ENVIRONMETS.production}/accounts/me`)
+      .pipe(take(1));
+  }
 }

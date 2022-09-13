@@ -1,1 +1,14 @@
-<p>home works!</p>
+<div class="row m-0 p-0 h-100">
+  <div class="col-5 m-0 h-100 d-flex flex-column">
+    <div class="app-view__title py-3 px-2"> Personal info </div>
+    <mat-card class="d-flex flex-column h-100 mat-elevation-z8 flex-grow-1">
+      <app-employee-details [employee]="personalInfo"></app-employee-details>
+    </mat-card>
+  </div>
+  <div class="col-7 m-0 h-100 d-flex flex-column">
+    <div class="app-view__title py-3 px-2"> Companies </div>
+    <mat-card class="d-flex flex-column h-100 mat-elevation-z8 flex-grow-1">
+      Companies
+    </mat-card>
+  </div>
+</div>

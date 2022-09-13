@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from 'src/app/types/types';
+import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  personalInfo!: Employee;
 
-  constructor() { }
+  constructor(private employeesService: EmployeesService) { }
 
   ngOnInit(): void {
+    this.employeesService
+      .getPersonalInfo()
+      .subscribe((res: any) => {
+        this.personalInfo = res;
+      });
   }
 
 }
