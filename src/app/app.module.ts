@@ -21,6 +21,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // app components
 import { AppComponent } from './app.component';
@@ -37,6 +38,8 @@ import { TokenInterceptor } from './modules/auth/interceptors/token.interceptor'
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { JobsComponent } from './modules/user-app/components/jobs/jobs.component';
 import { ApplicationsComponent } from './modules/user-app/components/applications/applications.component';
+import { EmployeeDetailsComponent } from './modules/user-app/components/employee-details/employee-details.component';
+import { AddEmployeeModalComponent } from './modules/user-app/components/add-employee-modal/add-employee-modal.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { ApplicationsComponent } from './modules/user-app/components/application
     AuthLayoutComponent,
     JobsComponent,
     ApplicationsComponent,
+    EmployeeDetailsComponent,
+    AddEmployeeModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +80,7 @@ import { ApplicationsComponent } from './modules/user-app/components/application
     MatSortModule,
     MatPaginatorModule,
     MatProgressBarModule,
+    MatDialogModule,
   ],
   providers: [
     {

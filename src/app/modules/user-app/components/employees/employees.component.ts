@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +9,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { switchMap, take } from 'rxjs';
 import { Employee } from 'src/app/types/types';
 import { EmployeesService } from '../../services/employees.service';
+import { AddEmployeeModalComponent } from '../add-employee-modal/add-employee-modal.component';
 
 @UntilDestroy()
 @Component({
@@ -27,7 +29,8 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private employeesService: EmployeesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -71,6 +74,15 @@ export class EmployeesComponent implements OnInit {
     this.router.navigate([], {
       queryParams: { employee: row.id },
       relativeTo: this.route,
+    });
+  }
+
+  onAddEmployee() {
+    this.dialog.open(AddEmployeeModalComponent, {
+      width: '400px',
+      data: {
+        isModal: true,
+      }
     });
   }
 

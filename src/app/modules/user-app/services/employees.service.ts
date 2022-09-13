@@ -7,7 +7,6 @@ import { ENVIRONMETS } from 'src/app/constants/environmentsEnum';
   providedIn: 'root'
 })
 export class EmployeesService {
-
   constructor(private http: HttpClient) { }
 
   getEmployees() {
@@ -22,6 +21,11 @@ export class EmployeesService {
 
   updateEmployee(employeeId: number, payload: any) {
     return this.http.patch(`${ENVIRONMETS.production}/accounts/accounts/${employeeId}`, payload)
+      .pipe(take(1));
+  }
+
+  deleteEmployee(employeeId: number) {
+    return this.http.delete(`${ENVIRONMETS.production}/accounts/accounts/${employeeId}`)
       .pipe(take(1));
   }
 }
