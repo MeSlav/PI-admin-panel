@@ -43,6 +43,8 @@ import { AddEmployeeModalComponent } from './modules/user-app/components/add-emp
 import { CompanyModalComponent } from './modules/user-app/components/company-modal/company-modal.component';
 import { AddEquipmentModalComponent } from './modules/user-app/components/add-equipment-modal/add-equipment-modal.component';
 import { AddServiceModalComponent } from './modules/user-app/components/add-service-modal/add-service-modal.component';
+import { JobsModalComponent } from './modules/user-app/components/jobs-modal/jobs-modal.component';
+import { ApplicationsModalComponent } from './modules/user-app/components/applications-modal/applications-modal.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { AddServiceModalComponent } from './modules/user-app/components/add-serv
     CompanyModalComponent,
     AddEquipmentModalComponent,
     AddServiceModalComponent,
+    JobsModalComponent,
+    ApplicationsModalComponent,
   ],
   imports: [
     BrowserModule,
