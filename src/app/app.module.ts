@@ -42,6 +42,7 @@ import { EmployeeDetailsComponent } from './modules/user-app/components/employee
 import { AddEmployeeModalComponent } from './modules/user-app/components/add-employee-modal/add-employee-modal.component';
 import { CompanyModalComponent } from './modules/user-app/components/company-modal/company-modal.component';
 import { AddEquipmentModalComponent } from './modules/user-app/components/add-equipment-modal/add-equipment-modal.component';
+import { AddServiceModalComponent } from './modules/user-app/components/add-service-modal/add-service-modal.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AddEquipmentModalComponent } from './modules/user-app/components/add-eq
     AddEmployeeModalComponent,
     CompanyModalComponent,
     AddEquipmentModalComponent,
+    AddServiceModalComponent,
   ],
   imports: [
     BrowserModule,

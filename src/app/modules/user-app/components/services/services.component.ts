@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { switchMap, take } from 'rxjs';
 import { Employee } from 'src/app/types/types';
 import { ServicesService } from '../../services/services.service';
+import { AddServiceModalComponent } from '../add-service-modal/add-service-modal.component';
 
 @UntilDestroy()
 @Component({
@@ -30,6 +32,7 @@ export class ServicesComponent implements OnInit, OnChanges {
     private servicesService: ServicesService,
     private router: Router,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +42,7 @@ export class ServicesComponent implements OnInit, OnChanges {
       price: new FormControl('', [Validators.required]),
       marketValue: new FormControl('',),
       category : new FormControl('',),
-    })
+    });
 
     this.servicesService.getServices()
       .pipe(
@@ -90,6 +93,12 @@ export class ServicesComponent implements OnInit, OnChanges {
 
   onNavigateBack() {
     history.back();
+  }
+
+  onAddService() {
+    this.dialog.open(AddServiceModalComponent, {
+      width: '450px',
+    })
   }
 
 }
