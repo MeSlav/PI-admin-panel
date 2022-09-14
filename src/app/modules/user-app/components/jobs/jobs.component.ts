@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProjectsService } from '../../services/projects.service';
+import { JobsModalComponent } from '../jobs-modal/jobs-modal.component';
 
 @Component({
   selector: 'app-jobs',
@@ -17,7 +19,10 @@ export class JobsComponent implements OnInit {
 
   jobsList: MatTableDataSource<any> = new MatTableDataSource<any>();
 
-  constructor(private projectsService: ProjectsService) { }
+  constructor(
+    private projectsService: ProjectsService,
+    private dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
     this.projectsService.getJobs()
@@ -33,6 +38,23 @@ export class JobsComponent implements OnInit {
     if (this.jobsList.paginator) {
       this.jobsList.paginator.firstPage();
     }
+  }
+
+  onRowSelect(row: any) {
+    this.dialog.open(JobsModalComponent, {
+      width: '450px',
+      data: {
+        jobData: row,
+        isEdit: true,
+      }
+    });
+  }
+
+  onAddJob() {
+    this.dialog.open(JobsModalComponent, {
+      width: '450px',
+      data: {}
+    });
   }
 
 }

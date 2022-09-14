@@ -26,7 +26,7 @@ export class CompanyModalComponent implements OnInit {
       name : new FormControl('', [Validators.required]),
       pdv_id: new FormControl(''),
       web: new FormControl(''),
-    })
+    });
   }
 
 }

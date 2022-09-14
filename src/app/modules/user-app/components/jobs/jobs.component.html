@@ -4,7 +4,7 @@
       <mat-label>Search</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Start typing to search..." #input>
     </mat-form-field>
-    <button mat-flat-button color="primary" class="col-3 col-lg-1">
+    <button mat-flat-button color="primary" class="col-3 col-lg-1" (click)="onAddJob()">
       <mat-icon>add</mat-icon>
       Add
     </button>
@@ -44,7 +44,13 @@
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr 
+        mat-row 
+        [ngClass]="{ 'table__row--hovered': row.hovered }"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
+        (click)="onRowSelect(row)"
+        *matRowDef="let row; columns: displayedColumns;">
+      </tr>
     </table>
   </div>
   <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
