@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { switchMap, take } from 'rxjs';
 import { EquipmentService } from '../../services/equipment.service';
+import { AddEquipmentModalComponent } from '../add-equipment-modal/add-equipment-modal.component';
 
 @UntilDestroy()
 @Component({
@@ -29,6 +31,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
     private equipmentService: EquipmentService,
     private router: Router,
     private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -89,6 +92,12 @@ export class EquipmentComponent implements OnInit, OnChanges {
 
   onNavigateBack() {
     history.back();
+  }
+
+  onAddEquipment() {
+    this.dialog.open(AddEquipmentModalComponent, {
+      width: '450px'
+    });
   }
 
 }
