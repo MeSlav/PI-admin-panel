@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CompaniesService } from '../../services/companies.service';
 
 @Component({
   selector: 'app-company-modal',
@@ -16,7 +17,10 @@ export class CompanyModalComponent implements OnInit {
   }
   isEdit: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private companyService: CompaniesService
+  ) {
     if(data.companyData) this.company = data.companyData;
     if(data.isEdit) this.isEdit = true;
   }
@@ -27,6 +31,27 @@ export class CompanyModalComponent implements OnInit {
       pdv_id: new FormControl(''),
       web: new FormControl(''),
     });
+  }
+
+  onDeleteCompany() {
+    this.companyService
+      .deleteCompany(this.company.id)
+      .subscribe(res => {
+        console.log(res)
+      });
+  }
+
+  onSaveAction() {
+    if (this.isEdit) {
+      this.companyService
+        .updateCompany(this.company.id, this.company)
+        .subscribe();
+      return;
+    }
+
+    this.companyService
+      .addCompany(this.company)
+      .subscribe();
   }
 
 }

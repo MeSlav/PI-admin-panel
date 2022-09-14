@@ -23,11 +23,24 @@
     </mat-form-field>
 
     <div class="d-flex px-2 justify-content-end">
-      <button mat-flat-button color="primary" mat-dialog-close [disabled]="!companyForm.dirty || !companyForm.valid">
+      <button 
+        mat-flat-button 
+        color="primary" 
+        mat-dialog-close 
+        [disabled]="!companyForm.dirty || !companyForm.valid"
+        (click)="onSaveAction()">
         {{ isEdit ? 'Save' : 'Add'}}
       </button>
       <button mat-button color="error" mat-dialog-close>
         Cancel
+      </button>
+      <button 
+        mat-flat-button 
+        color="warn" 
+        *ngIf="isEdit"
+        mat-dialog-close
+        (click)="onDeleteCompany()">
+        Delete
       </button>
     </div>
   </form>
