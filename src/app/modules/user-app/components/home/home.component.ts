@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from 'src/app/types/types';
 import { CompaniesService } from '../../services/companies.service';
 import { EmployeesService } from '../../services/employees.service';
+import { CompanyModalComponent } from '../company-modal/company-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private employeesService: EmployeesService,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,23 @@ export class HomeComponent implements OnInit {
     if (this.companies.paginator) {
       this.companies.paginator.firstPage();
     }
+  }
+
+  onRowSelect(row: any) {
+    this.dialog.open(CompanyModalComponent, {
+      width: '400px',
+      data: {
+        isEdit: true,
+        companyData: row,
+      }
+    });
+  }
+
+  onAddCompany() {
+    this.dialog.open(CompanyModalComponent, {
+      width: '400px',
+      data: {}
+    });
   }
 
 }

@@ -40,6 +40,7 @@ import { JobsComponent } from './modules/user-app/components/jobs/jobs.component
 import { ApplicationsComponent } from './modules/user-app/components/applications/applications.component';
 import { EmployeeDetailsComponent } from './modules/user-app/components/employee-details/employee-details.component';
 import { AddEmployeeModalComponent } from './modules/user-app/components/add-employee-modal/add-employee-modal.component';
+import { CompanyModalComponent } from './modules/user-app/components/company-modal/company-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AddEmployeeModalComponent } from './modules/user-app/components/add-emp
     ApplicationsComponent,
     EmployeeDetailsComponent,
     AddEmployeeModalComponent,
+    CompanyModalComponent,
   ],
   imports: [
     BrowserModule,
