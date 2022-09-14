@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProjectsService } from '../../services/projects.service';
+import { ApplicationsModalComponent } from '../applications-modal/applications-modal.component';
 
 @Component({
   selector: 'app-applications',
@@ -17,7 +19,10 @@ export class ApplicationsComponent implements OnInit {
 
   applicationsList: MatTableDataSource<any> = new MatTableDataSource<any>();
 
-  constructor(private projectsService: ProjectsService) { }
+  constructor(
+    private projectsService: ProjectsService,
+    private dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
     this.projectsService.getApplications()
@@ -33,6 +38,23 @@ export class ApplicationsComponent implements OnInit {
     if (this.applicationsList.paginator) {
       this.applicationsList.paginator.firstPage();
     }
+  }
+
+  onRowSelect(row: any) {
+    this.dialog.open(ApplicationsModalComponent, {
+      width: '450px',
+      data: {
+        isEdit: true,
+        applicationData: row,
+      }
+    });
+  }
+
+  onAddApplication() {
+    this.dialog.open(ApplicationsModalComponent, {
+      width: '450px',
+      data: {},
+    });
   }
 
 }
